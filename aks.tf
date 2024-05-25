@@ -1,11 +1,9 @@
 resource "azurerm_resource_group" "aks_rg" {
-    count                     = var.create-resource ? 1 : 0
     name     = local.aks.resource-group-name
     location = local.aks.location
 }
 
 resource "azurerm_virtual_network" "aks_vnet" {
-    count                     = var.create-resource ? 1 : 0
     name                = local.aks.vnet-name
     location            = azurerm_resource_group.aks_rg.location
     resource_group_name = azurerm_resource_group.aks_rg.name
@@ -13,7 +11,6 @@ resource "azurerm_virtual_network" "aks_vnet" {
 }
 
 resource "azurerm_subnet" "aks_snet" {
-    count                = var.create-resource ? 1 : 0
     name                 = local.aks.subnet-name
     resource_group_name  = azurerm_resource_group.aks_rg.name
     virtual_network_name = azurerm_virtual_network.aks_vnet.name
