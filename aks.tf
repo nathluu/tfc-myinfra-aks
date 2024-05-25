@@ -23,7 +23,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     location                  = azurerm_resource_group.aks_rg.location
     resource_group_name       = azurerm_resource_group.aks_rg.name
     sku_tier                  = local.aks.sku
-    dns_prefix                = ""
+    dns_prefix                = "natcom"
     # automatic_channel_upgrade = none
     private_cluster_enabled   = local.aks.private-cluster-enabled
 
