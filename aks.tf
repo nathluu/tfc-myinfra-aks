@@ -24,7 +24,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     resource_group_name       = azurerm_resource_group.aks_rg.name
     sku_tier                  = local.aks.sku
     dns_prefix                = ""
-    automatic_channel_upgrade = none
+    # automatic_channel_upgrade = none
     private_cluster_enabled   = local.aks.private-cluster-enabled
 
     default_node_pool {
