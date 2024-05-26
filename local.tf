@@ -7,5 +7,6 @@ locals {
         subnet-name             = "natcom-aks-snet"
         sku                     = "Standard"
         private-cluster-enabled = false
+        admin_group_object_ids  = ["a5d5db85-021c-436f-83b9-9e2b9070a0df"]
     }
 }
