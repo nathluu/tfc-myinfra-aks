@@ -51,10 +51,10 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
     network_profile {
         network_plugin     = "kubenet"
-        network_policy     = "calico"
-        dns_service_ip     = "10.0.2.10"
-        pod_cidr           = "10.10.0.0/16"
-        service_cidr       = "10.0.2.0/24"
+        # network_policy     = "calico"
+        # dns_service_ip     = "10.0.2.10"
+        # pod_cidr           = "10.10.0.0/16"
+        # service_cidr       = "10.0.2.0/24"
         load_balancer_sku  = "standard"
     }
 }
