@@ -19,23 +19,23 @@ resource "azurerm_resource_group" "rg" {
 # }
 
 
-resource "azurerm_search_service" "search_service" {
-    name                            = local.aisearch.name
-    resource_group_name             = azurerm_resource_group.rg.name
-    location                        = azurerm_resource_group.rg.location
-    sku                             = local.aisearch.sku
-    local_authentication_enabled    = local.aisearch.local_authentication_enabled
-    authentication_failure_mode     = local.aisearch.local_authentication_enabled == true ? "http403" : null
-    public_network_access_enabled   = local.aisearch.public_network_access_enabled
-    allowed_ips = local.aisearch.public_network_access_enabled == true? local.aisearch.allowed_ips: null
-    partition_count = local.aisearch.partition_count
-    replica_count = local.aisearch.replica_count
-    semantic_search_sku = (local.aisearch.sku != "free" && local.aisearch.sku != "basic") ? local.aisearch.semantic_search_sku : null
+# resource "azurerm_search_service" "search_service" {
+#     name                            = local.aisearch.name
+#     resource_group_name             = azurerm_resource_group.rg.name
+#     location                        = azurerm_resource_group.rg.location
+#     sku                             = local.aisearch.sku
+#     local_authentication_enabled    = local.aisearch.local_authentication_enabled
+#     authentication_failure_mode     = local.aisearch.local_authentication_enabled == true ? "http403" : null
+#     public_network_access_enabled   = local.aisearch.public_network_access_enabled
+#     allowed_ips = local.aisearch.public_network_access_enabled == true? local.aisearch.allowed_ips: null
+#     partition_count = local.aisearch.partition_count
+#     replica_count = local.aisearch.replica_count
+#     semantic_search_sku = (local.aisearch.sku != "free" && local.aisearch.sku != "basic") ? local.aisearch.semantic_search_sku : null
 
-    lifecycle {
-      ignore_changes = [ tags ]
-    }
-}
+#     lifecycle {
+#       ignore_changes = [ tags ]
+#     }
+# }
 
 # resource "azurerm_private_endpoint" "pe" {
 #   name                = "${local.aisearch.name}-pe"
