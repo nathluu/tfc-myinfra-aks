@@ -1,18 +1,18 @@
-resource "azurerm_resource_group" "rg" {
+resource "azurerm_resource_group" "aksrg" {
     name     = local.aks.resource-group-name
     location = local.aks.location
 }
 
 resource "azurerm_virtual_network" "vnet" {
     name                = local.aks.vnet-name
-    location            = azurerm_resource_group.rg.location
-    resource_group_name = azurerm_resource_group.rg.name
+    location            = azurerm_resource_group.aksrg.location
+    resource_group_name = azurerm_resource_group.aksrg.name
     address_space       = ["192.168.0.0/16"]
 }
 
 resource "azurerm_subnet" "subnet" {
     name                 = local.aks.subnet-name
-    resource_group_name  = azurerm_resource_group.rg.name
+    resource_group_name  = azurerm_resource_group.aksrg.name
     virtual_network_name = azurerm_virtual_network.vnet.name
     address_prefixes     = ["192.168.1.0/24"]
     service_endpoints    = ["Microsoft.ContainerRegistry"]
@@ -21,8 +21,8 @@ resource "azurerm_subnet" "subnet" {
 resource "azurerm_kubernetes_cluster" "aks" {
     count                     = var.create-resource ? 1 : 0
     name                      = local.aks.name
-    location                  = azurerm_resource_group.rg.location
-    resource_group_name       = azurerm_resource_group.rg.name
+    location                  = azurerm_resource_group.aksrg.location
+    resource_group_name       = azurerm_resource_group.aksrg.name
     sku_tier                  = local.aks.sku
     dns_prefix                = "natcom"
     # automatic_channel_upgrade = none
